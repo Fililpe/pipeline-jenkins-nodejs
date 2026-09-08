@@ -1,0 +1,30 @@
+name: CI Node.js
+
+on:
+  push:
+    brances: [main]
+  pull_request:
+    brances: [main]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu:latest
+
+    steps:
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build
+        run: npm run buil
+
+      - name: Testes
+        run: npm test
